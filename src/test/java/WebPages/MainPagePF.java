@@ -50,7 +50,7 @@ public class MainPagePF {
     private WebElement btn_ansambluRez;
     @FindBy(css = "#companies > span")
     private WebElement btn_companii;
-    @FindBy(css = "#finance > span")
+    @FindBy(id = "finance")
     private WebElement btn_finantare;
     @FindBy(css = ".edaxo2a3 > a:nth-child(1) > span:nth-child(2)")
     private WebElement btn_contulMeu;

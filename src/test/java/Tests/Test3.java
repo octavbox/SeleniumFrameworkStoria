@@ -14,7 +14,7 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class Test3 {
-    private static WebDriver driver;
+    WebDriver driver;
     MainPagePF mainPage;
     LoginPagePF loginPage;
     Properties properties;
