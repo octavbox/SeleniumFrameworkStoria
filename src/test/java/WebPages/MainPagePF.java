@@ -115,4 +115,18 @@ public class MainPagePF {
     public void pressSearchButton() {
         btn_searchButton.click();
     }
+
+    //LOGGED IN BUTTONS
+    @FindBy(xpath = "/html/body/div[1]/div[1]/div/div/div[2]/div[2]")
+    private WebElement btn_userMenu;
+
+    @FindBy(css = ".css-2wtrb3.e167po0p6")
+    private WebElement btn_logout;
+
+    public void pressUserMenu(){
+        btn_userMenu.click();
+    }
+    public void pressLogout(){btn_logout.click();}
+
+
 }

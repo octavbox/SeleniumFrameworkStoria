@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
-    <test verbose="2" preserve-order="true" name="C:/Users/oboca/IdeaProjects/Storia2/src/test/java/Tests/Test3.java">
+<suite name="All Test Suite" parallel="tests">
+    <test verbose="2" preserve-order="true" name="UserLogin">
         <classes>
-            <class name="Tests.Test3">
-            </class>
+            <class name="TestRunners.TestRunnerUserLogin"/>
         </classes>
     </test>
+
+    <test verbose="2" preserve-order="true" name="LoggedInActions">
+        <classes>
+            <class name="TestRunners.TestRunnerLoggedInActions"/>
+        </classes>
+    </test>
+
 </suite>

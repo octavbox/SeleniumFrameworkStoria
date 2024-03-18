@@ -15,9 +15,3 @@ Feature: User Login
     And the user submits the login form
     Then the user should see an error message
     And the user should remain on the login page
-
-  Scenario: User logs out of their account
-    Given the user is logged in
-    When the user clicks on the "Logout" button
-    Then the user should be logged out
-    And the user should be redirected to the homepage

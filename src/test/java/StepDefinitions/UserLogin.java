@@ -11,7 +11,10 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
+import org.testng.annotations.Test;
+
 import java.util.Properties;
+
 
 public class UserLogin {
     WebDriver driver;
@@ -28,12 +31,12 @@ public class UserLogin {
         loginPage = new LoginPagePF(driver);
     }
 
-    //    BACKGROUND
+    //<Background>
     @Given("Storia main page is visible")
     public void storia_main_page_is_visible() {
         Assert.assertEquals(driver.getTitle(), "Storia.ro - anunțuri imobiliare pentru apartamente, case, terenuri");
     }
-    //BACKGROUND
+    //</Background>
 
     @When("the user is on the login page")
     public void the_user_is_on_the_login_page() {
