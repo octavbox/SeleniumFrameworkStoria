@@ -22,14 +22,13 @@ public class UserLogin {
     LoginPagePF loginPage;
     Properties properties;
     Config props = new Config(properties);
-    Hooks hooks;
 
     public UserLogin() {
-        hooks = new Hooks();
-        driver = hooks.getDriver();
+        driver = Hooks.getDriver();
         mainPage = new MainPagePF(driver);
         loginPage = new LoginPagePF(driver);
     }
+
 
     //<Background>
     @Given("Storia main page is visible")

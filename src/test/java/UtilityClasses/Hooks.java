@@ -16,7 +16,7 @@ public class Hooks {
     static WebDriver driver;
     MainPagePF mainPage;
 
-    public WebDriver getDriver() {
+    public static WebDriver getDriver() {
         return driver;
     }
 
@@ -31,6 +31,7 @@ public class Hooks {
         mainPage = new MainPagePF(driver);
         mainPage.pressAccept();
     }
+
     @After
     public void tearDown() {
         driver.quit();

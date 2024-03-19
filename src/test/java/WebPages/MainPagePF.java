@@ -84,14 +84,24 @@ public class MainPagePF {
     }
 
     //SEARCH FIELDS
-    @FindBy(className = "react-select__single-value")
+    @FindBy(css = "[data-cy='search-form--field--estate']")
     private WebElement drp_category;
-    @FindBy(className = "react-select__control")
+    @FindBy(css = "[data-cy='search-form--field--transaction']")
     private WebElement drp_sellOrRent;
     @FindBy(id = "location")
     private WebElement drp_location;
     @FindBy(id = "location-picker-input")
     private WebElement txt_locationField;
+    @FindBy(css = "[data-cy='search-form--field--distanceRadius']")
+    private WebElement drp_radius;
+    @FindBy(id = "priceMin")
+    private WebElement txt_priceMin;
+    @FindBy(id = "priceMax")
+    private WebElement txt_priceMax;
+    @FindBy(id = "areaMin")
+    private WebElement txt_areaMin;
+    @FindBy(id = "areaMax")
+    private WebElement txt_areaMax;
     @FindBy(id = "search-form-submit")
     private WebElement btn_searchButton;
 
@@ -112,8 +122,21 @@ public class MainPagePF {
         driver.findElement(By.xpath(String.format("//strong[text()='%s']", value))).click();
     }
 
+    public void enterRadius(String value) {
+        drp_radius.click();
+        driver.findElement(By.xpath(String.format("//div[text()='%s']", value))).click();
+    }
+    public void enterPriceMin(String value){txt_priceMin.sendKeys(value);}
+    public void enterPriceMax(String value){txt_priceMax.sendKeys(value);}
+    public void enterAreaMin(String value){txt_areaMin.sendKeys(value);}
+    public void enterAreaMax(String value){txt_areaMax.sendKeys(value);}
     public void pressSearchButton() {
         btn_searchButton.click();
+    }
+    public int getCounterFromSearchButton(){
+        String text = btn_searchButton.getText().replaceAll("[^0-9]", "");
+        int number = Integer.parseInt(text);
+        return number;
     }
 
     //LOGGED IN BUTTONS

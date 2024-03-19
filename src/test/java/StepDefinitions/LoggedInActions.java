@@ -22,14 +22,13 @@ public class LoggedInActions {
     LoginPagePF loginPage;
     Properties properties;
     Config props = new Config(properties);
-    Hooks hooks;
 
     public LoggedInActions() {
-        hooks = new Hooks();
-        driver = hooks.getDriver();
+        driver = Hooks.getDriver();
         mainPage = new MainPagePF(driver);
         loginPage = new LoginPagePF(driver);
     }
+
 
     //<Background>
     @Given("the user is logged in")
