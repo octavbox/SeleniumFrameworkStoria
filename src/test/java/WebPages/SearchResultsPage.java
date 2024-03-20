@@ -14,13 +14,19 @@ public class SearchResultsPage {
         PageFactory.initElements(driver,this);
     }
 
-    //Header zone
+    //SEARCH RESULTS HEADER
+    @FindBy(css = "[data-cy='search-listing.heading']")
+    private WebElement tzt_title;
     @FindBy(css = ".css-o0w5yo.e1fw9pn56")
-    public WebElement tzt_nrAnunturi;
+    private WebElement tzt_nrAnunturi;
 
     public int getCounterFromAnunturi() {
         String text = tzt_nrAnunturi.getText().substring(8).replaceAll("[^0-9]","");
         return Integer.parseInt(text);
+    }
+    public String getSearchTitle(){
+        String text = tzt_title.getText();
+        return text;
     }
 
 }

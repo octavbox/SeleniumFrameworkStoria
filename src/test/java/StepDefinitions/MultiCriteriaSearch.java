@@ -1,7 +1,6 @@
 package StepDefinitions;
 
 import UtilityClasses.Hooks;
-import WebPages.LoginPagePF;
 import WebPages.MainPagePF;
 import WebPages.SearchResultsPage;
 import io.cucumber.java.en.And;
@@ -32,10 +31,12 @@ public class MultiCriteriaSearch {
     public void the_user_selects_from_the_transaction_type_dropdown(String transactionType) {
         mainPage.enterSellOrRent(transactionType);
     }
+
     @When("the user selects {string} from the radius dropdown")
     public void the_user_selects_from_the_radius_dropdown(String radius) {
         mainPage.enterRadius(radius);
     }
+
     @And("the user selects {string} from the city dropdown")
     public void the_user_selects_from_the_city_dropdown(String city) {
         if (city.isBlank()) {
@@ -78,12 +79,16 @@ public class MultiCriteriaSearch {
 
     @Then("the search results page appears")
     public void the_search_results_page_appears() {
-        Assert.assertTrue(driver.getTitle().contains("Storia"));
+        Assert.assertEquals(driver.getTitle(), "Storia.ro - anunțuri imobiliare pentru apartamente, case, terenuri");
     }
 
-    @And("the search results match the search criteria")
-    public void the_search_results_match_the_search_criteria() {
-        System.out.println("step");
+    @And("the search results match the search criteria {string} and {string} and {string}")
+    public void the_search_results_match_the_search_criteria_and_and(String propertyType, String transactionType, String city) {
+        String pageTitle = searchResultsPage.getSearchTitle();
+        String modifiedTransactionType = Character.toLowerCase(transactionType.charAt(0)) + transactionType.substring(1);
+        String concatTitle = propertyType + " " + modifiedTransactionType + ": " + city;
+        System.out.println(pageTitle + " / " + concatTitle);
+        Assert.assertEquals(pageTitle, concatTitle);
     }
 
     @And("the counter number on the search button matches the number in the search results")
@@ -91,6 +96,4 @@ public class MultiCriteriaSearch {
         Assert.assertEquals(counter1, searchResultsPage.getCounterFromAnunturi());
         System.out.println("Search counter: " + counter1);
     }
-
-
 }
