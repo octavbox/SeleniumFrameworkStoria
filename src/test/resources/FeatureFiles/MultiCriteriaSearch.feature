@@ -13,7 +13,7 @@ Feature:  Multi-criteria Property Search
     And the user enters "<areaMin>" in the lower end surface field
     And the user enters "<areaMax>" in the higher end surface field
     Then the search button contains a count of the results
-    And the user submits the search form
+    And the user clicks the Search button
     Then the search results page appears
     And the search results match the search criteria "<propertyType>" and "<transactionType>" and "<city>"
     And the counter number on the search button matches the number in the search results

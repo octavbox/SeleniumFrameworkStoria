@@ -1,8 +1,8 @@
 package StepDefinitions;
 
 import UtilityClasses.Hooks;
-import WebPages.MainPagePF;
-import WebPages.SearchResultsPage;
+import WebPages.MainPage;
+import WebPages.RoRezultatePage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -12,14 +12,14 @@ import org.testng.Assert;
 public class MultiCriteriaSearch {
 
     WebDriver driver;
-    MainPagePF mainPage;
-    SearchResultsPage searchResultsPage;
+    MainPage mainPage;
+    RoRezultatePage searchResultsPage;
     int counter1;
 
     public MultiCriteriaSearch() {
         driver = Hooks.getDriver();
-        mainPage = new MainPagePF(driver);
-        searchResultsPage = new SearchResultsPage(driver);
+        mainPage = new MainPage(driver);
+        searchResultsPage = new RoRezultatePage(driver);
     }
 
     @When("the user selects {string} from the property type dropdown")
@@ -72,8 +72,8 @@ public class MultiCriteriaSearch {
         counter1 = mainPage.getCounterFromSearchButton();
     }
 
-    @When("the user submits the search form")
-    public void the_user_submits_the_search_form() {
+    @When("the user clicks the Search button")
+    public void the_user_clicks_the_Search_button() {
         mainPage.pressSearchButton();
     }
 

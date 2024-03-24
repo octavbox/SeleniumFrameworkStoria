@@ -2,8 +2,8 @@ package StepDefinitions;
 
 import Configuration.Config;
 import UtilityClasses.Hooks;
-import WebPages.LoginPagePF;
-import WebPages.MainPagePF;
+import WebPages.MainPage;
+import WebPages.RoLoginPage;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -11,22 +11,21 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.Test;
 
 import java.util.Properties;
 
 
 public class UserLogin {
     WebDriver driver;
-    MainPagePF mainPage;
-    LoginPagePF loginPage;
+    MainPage mainPage;
+    RoLoginPage loginPage;
     Properties properties;
     Config props = new Config(properties);
 
     public UserLogin() {
         driver = Hooks.getDriver();
-        mainPage = new MainPagePF(driver);
-        loginPage = new LoginPagePF(driver);
+        mainPage = new MainPage(driver);
+        loginPage = new RoLoginPage(driver);
     }
 
 

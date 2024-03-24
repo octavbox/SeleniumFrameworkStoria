@@ -1,8 +1,9 @@
 package TestNGTests;
 
 import Configuration.Config;
-import WebPages.LoginPagePF;
-import WebPages.MainPagePF;
+import WebPages.MainPage;
+import WebPages.RoLoginPage;
+import WebPages.StartPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
@@ -18,8 +19,9 @@ import java.util.concurrent.TimeUnit;
 public class TestThreadLocal {
     private final ThreadLocal<WebDriver> TLDriver = new ThreadLocal<>();
 
-    MainPagePF mainPage;
-    LoginPagePF loginPage;
+    MainPage mainPage;
+    StartPage startPage;
+    RoLoginPage loginPage;
     Properties properties;
     Config props = new Config(properties);
 
@@ -44,7 +46,7 @@ public class TestThreadLocal {
         }
     }
 
-    @Test
+    @org.testng.annotations.Test
     public void allButtons() {
         WebDriver driver = TLDriver.get();
         driver.get("https://www.storia.ro");
@@ -52,8 +54,8 @@ public class TestThreadLocal {
         System.out.println("Session ID: " + ((FirefoxDriver) driver).getSessionId().toString());
         System.out.println("Thread ID: " + Thread.currentThread().getId());
 
-        mainPage = new MainPagePF(driver);
-        mainPage.pressAccept();
+        mainPage = new MainPage(driver);
+        startPage.pressAccept();
         mainPage.pressDeVanzare();
         mainPage.pressDeInchiriat();
         mainPage.pressAnsambluRez();
@@ -65,7 +67,7 @@ public class TestThreadLocal {
 
     }
 
-    @Test
+    @org.testng.annotations.Test
     public void login() {
         WebDriver driver = TLDriver.get();
         driver.get("https://www.storia.ro");
@@ -73,11 +75,11 @@ public class TestThreadLocal {
         System.out.println("Session ID: " + ((FirefoxDriver) driver).getSessionId().toString());
         System.out.println("Thread ID: " + Thread.currentThread().getId());
 
-        mainPage = new MainPagePF(driver);
-        mainPage.pressAccept();
+        mainPage = new MainPage(driver);
+        startPage.pressAccept();
         mainPage.pressContulMeu();
 
-        loginPage = new LoginPagePF(driver);
+        loginPage = new RoLoginPage(driver);
         loginPage.enterEmail(props.getProperty("username"));
         loginPage.enterPassword(props.getProperty("password"));
         loginPage.pressEye();
@@ -96,8 +98,8 @@ public class TestThreadLocal {
         System.out.println("Session ID: " + ((FirefoxDriver) driver).getSessionId().toString());
         System.out.println("Thread ID: " + Thread.currentThread().getId());
 
-        mainPage = new MainPagePF(driver);
-        mainPage.pressAccept();
+        mainPage = new MainPage(driver);
+        startPage.pressAccept();
 
         mainPage.enterCategory("Garsoniere");
         mainPage.enterSellOrRent("De vânzare");

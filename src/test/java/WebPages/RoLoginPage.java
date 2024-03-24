@@ -1,16 +1,15 @@
 package WebPages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 // https://www.storia.ro/ro/login
-public class LoginPagePF {
+public class RoLoginPage {
     WebDriver driver;
 
-    public LoginPagePF(WebDriver driver) {
+    public RoLoginPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
     }

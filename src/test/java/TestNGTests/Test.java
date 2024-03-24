@@ -1,21 +1,24 @@
 package TestNGTests;
 
 import Configuration.Config;
-import WebPages.LoginPagePF;
-import WebPages.MainPagePF;
+import WebPages.MainPage;
+import WebPages.RoLoginPage;
+import WebPages.StartPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class Test {
     WebDriver driver;
-    MainPagePF mainPage;
-    LoginPagePF loginPage;
+    MainPage mainPage;
+    StartPage startPage;
+    RoLoginPage loginPage;
     Properties properties;
     Config props = new Config(properties);
 
@@ -28,8 +31,8 @@ public class Test {
 
         System.out.println("Session ID: " + ((FirefoxDriver) driver).getSessionId().toString());
         System.out.println("Thread ID: " + Thread.currentThread().getId());
-        mainPage = new MainPagePF(driver);
-        mainPage.pressAccept();
+        mainPage = new MainPage(driver);
+        startPage.pressAccept();
     }
 
     @AfterClass
@@ -50,7 +53,7 @@ public class Test {
     @org.testng.annotations.Test(priority = 1)
     public void login() {
         mainPage.pressContulMeu();
-        loginPage = new LoginPagePF(driver);
+        loginPage = new RoLoginPage(driver);
         loginPage.enterEmail(props.getProperty("username"));
         loginPage.enterPassword(props.getProperty("password"));
         loginPage.pressEye();

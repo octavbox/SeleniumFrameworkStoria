@@ -1,7 +1,6 @@
 package UtilityClasses;
 import net.masterthought.cucumber.Configuration;
 import net.masterthought.cucumber.ReportBuilder;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,19 +8,17 @@ import java.util.List;
 public class CucumberReporting {
 
     public static void main(String[] args) {
-        String buildNumber = "200324";
+        String buildNumber = "230324";
         String projectName = "SeleniumFramework";
+        File reportOutputDir = new File("target/Reports/ReportMasterthought");
 
+            Configuration configuration = new Configuration(reportOutputDir, projectName);
+            configuration.setBuildNumber(buildNumber);
 
-        File reportOutputDirectory = new File("target/Reports");
-        List<String> jsonFiles = new ArrayList<>();
-        jsonFiles.add("target/Reports/Cucumber-reports-json/cucumber-report"); // Path to your JSON-formatted Cucumber test results
+            List<String> jsonInput = new ArrayList<>();
+            jsonInput.add("target/Reports/Cucumber-reports-json/cucumber-reports");
 
-        Configuration configuration = new Configuration(reportOutputDirectory, projectName);
-        configuration.setBuildNumber(buildNumber);
-
-
-        ReportBuilder reportBuilder = new ReportBuilder(jsonFiles, configuration);
-        reportBuilder.generateReports();
+                ReportBuilder reportBuilder = new ReportBuilder(jsonInput, configuration);
+                reportBuilder.generateReports();
     }
 }

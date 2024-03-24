@@ -1,0 +1,14 @@
+Page Object Model classes:
+
+    Web Element naming:
+        - text field element: txt_<name>
+        - dropdown element: drp_<name>
+        - button / clickable element: btn_<name>
+        - unclickable element: fix_<name>
+
+    Method naming:
+        - click button / option in dropdown: press<Name>()
+        - type text in field: enter<Name>()
+        - return data from web element: get<Data>From<Name>()
+        - return web element from list: get<Name>At()
+

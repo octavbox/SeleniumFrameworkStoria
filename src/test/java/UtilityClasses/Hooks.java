@@ -1,10 +1,9 @@
 package UtilityClasses;
 
-import WebPages.MainPagePF;
+import WebPages.StartPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.util.concurrent.TimeUnit;
@@ -14,7 +13,7 @@ public class Hooks {
     //        The Webdriver instance in the Hooks class is set to static so that the Hooks instance in the StepDefiniton constructor
     //        will receive the same WebDriver instance that was created in the Hooks class.
     static WebDriver driver;
-    MainPagePF mainPage;
+    StartPage startPage;
 
     public static WebDriver getDriver() {
         return driver;
@@ -28,8 +27,8 @@ public class Hooks {
         System.out.println("Session ID: " + ((FirefoxDriver) driver).getSessionId().toString());
         System.out.println("Thread ID: " + Thread.currentThread().getId());
         driver.get("https://www.storia.ro");
-        mainPage = new MainPagePF(driver);
-        mainPage.pressAccept();
+        startPage = new StartPage(driver);
+        startPage.pressAccept();
     }
 
     @After

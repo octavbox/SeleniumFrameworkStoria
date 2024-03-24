@@ -3,13 +3,13 @@
 <suite name="All Test Suite">
     <test verbose="2" preserve-order="true" name="UserLogin">
         <classes>
-            <class name="TestRunners.TestRunnerUserLogin"/>
+            <class name="TestRunners.TestNGTestRunner"/>
         </classes>
     </test>
 
     <test verbose="2" preserve-order="true" name="LoggedInActions">
         <classes>
-            <class name="TestRunners.TestRunnerLoggedInActions"/>
+            <class name="TestRunners.Parallel.TestRunnerLoggedInActions"/>
         </classes>
     </test>
 
