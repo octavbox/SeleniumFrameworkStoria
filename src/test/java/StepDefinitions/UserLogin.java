@@ -12,20 +12,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-import java.util.Properties;
 
 
 public class UserLogin {
     WebDriver driver;
     MainPage mainPage;
-    RoLoginPage loginPage;
-    Properties properties;
-    Config props = new Config(properties);
+    RoLoginPage roLoginPage;
+
+    Config props = new Config();
 
     public UserLogin() {
         driver = Hooks.getDriver();
+        //Web page:
         mainPage = new MainPage(driver);
-        loginPage = new RoLoginPage(driver);
+        roLoginPage = new RoLoginPage(driver);
     }
 
 
@@ -43,13 +43,13 @@ public class UserLogin {
 
     @And("the user enters valid login credentials")
     public void the_user_enters_valid_login_credentials() {
-        loginPage.enterEmail(props.getProperty("username"));
-        loginPage.enterPassword(props.getProperty("password"));
+        roLoginPage.enterEmail(props.getProperty("username"));
+        roLoginPage.enterPassword(props.getProperty("password"));
     }
 
     @And("the user submits the login form")
     public void the_user_submits_the_login_form() {
-        loginPage.pressAutentificareButton();
+        roLoginPage.pressAutentificareButton();
     }
 
     @Then("the user should be logged in")
@@ -59,8 +59,8 @@ public class UserLogin {
 
     @When("the user enters invalid login credentials")
     public void the_user_enters_invalid_login_credentials() {
-        loginPage.enterEmail(props.getProperty("wrongUsername"));
-        loginPage.enterPassword(props.getProperty("wrongPassword"));
+        roLoginPage.enterEmail(props.getProperty("wrongUsername"));
+        roLoginPage.enterPassword(props.getProperty("wrongPassword"));
     }
 
     @Then("the user should see an error message")

@@ -11,7 +11,7 @@ import io.cucumber.testng.CucumberOptions;
         glue = {"StepDefinitions",
                 "UtilityClasses"},
 
-//        tags = "@Test",
+        tags = "@Active",
 
         plugin = {"pretty",
                 "html:target/Reports/Cucumber-reports-html/cucumber-reports",

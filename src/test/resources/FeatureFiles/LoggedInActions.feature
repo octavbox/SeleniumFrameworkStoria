@@ -3,13 +3,14 @@ Feature: Logged In Actions
   Background:
     Given the user is logged in
 
+  @Active
   Scenario: User logs out of their account
     When the user clicks on User Menu button
     And the user clicks on Logout button
     Then the user should be logged out
     And the user should be redirected to the homepage
 
-    @Test
+
   Scenario: User can Add and Remove items from Favourites
     When the user clicks the Search button
     And the search results page appears
@@ -21,7 +22,7 @@ Feature: Logged In Actions
     And the user clicks on the Anunturi button
     Then the Saved page appears
     And the Anunturi tab counter contains the number of selected items
-    When the user clicks all the Heart buttons
-    Then the Anunturi tab counter contains zero items
+    When the user clicks the Heart button on all items
+    Then the Anunturi tab is empty
 
 

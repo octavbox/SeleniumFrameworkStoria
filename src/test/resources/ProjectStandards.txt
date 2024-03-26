@@ -4,7 +4,8 @@ Page Object Model classes:
         - text field element: txt_<name>
         - dropdown element: drp_<name>
         - button / clickable element: btn_<name>
-        - unclickable element: fix_<name>
+        - not clickable element: fix_<name>
+        - list object (@FindAll): list_<name>
 
     Method naming:
         - click button / option in dropdown: press<Name>()

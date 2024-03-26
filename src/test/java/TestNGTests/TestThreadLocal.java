@@ -22,8 +22,7 @@ public class TestThreadLocal {
     MainPage mainPage;
     StartPage startPage;
     RoLoginPage loginPage;
-    Properties properties;
-    Config props = new Config(properties);
+    Config props = new Config();
 
 
     @BeforeMethod

@@ -19,16 +19,16 @@ public class RoRezultatePage {
 
     //SEARCH RESULTS HEADER
     @FindBy(css = "[data-cy='search-listing.heading']")
-    private WebElement tzt_title;
+    private WebElement fix_title;
     @FindBy(css = ".css-o0w5yo.e1fw9pn56")
-    private WebElement tzt_nrAnunturi;
+    private WebElement fix_nrAnunturi;
 
     public int getCounterFromAnunturi() {
-        String text = tzt_nrAnunturi.getText().substring(8).replaceAll("[^0-9]","");
+        String text = fix_nrAnunturi.getText().substring(8).replaceAll("[^0-9]","");
         return Integer.parseInt(text);
     }
     public String getSearchTitle(){
-        String text = tzt_title.getText();
+        String text = fix_title.getText();
         return text;
     }
 

@@ -18,6 +18,7 @@ public class MultiCriteriaSearch {
 
     public MultiCriteriaSearch() {
         driver = Hooks.getDriver();
+        //Web page:
         mainPage = new MainPage(driver);
         searchResultsPage = new RoRezultatePage(driver);
     }

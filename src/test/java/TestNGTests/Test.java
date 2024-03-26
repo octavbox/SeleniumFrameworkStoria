@@ -19,8 +19,7 @@ public class Test {
     MainPage mainPage;
     StartPage startPage;
     RoLoginPage loginPage;
-    Properties properties;
-    Config props = new Config(properties);
+    Config props = new Config();
 
     @BeforeClass
     public void setUp() {

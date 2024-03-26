@@ -1,0 +1,38 @@
+
+--incognito: Starts Chrome in private browsing mode.
+--private: Starts Firefox in private browsing mode.
+--inprivate: Starts Edge in private browsing mode.
+
+--headless: Runs Chrome, Firefox and Edge in headless mode, without a graphical user interface. Unable to find web elements on Chrome, Edge
+--disable-gpu: Disables GPU hardware acceleration, which can help with stability on some systems.
+--window-size=<width>,<height>: Sets the initial window size when launching Firefox.
+--start-maximized: Starts browser maximized to fill the entire screen. Only for Chrome
+--disable-cache: Disables the browser cache for Chrome and Edge.
+
+--no-sandbox: Disables the sandbox for Chrome and Edge.
+--disable-infobars: Disables the infobar that displays at the top of the browser window.
+--disable-extensions: Disables all installed extensions.
+--disable-popup-blocking: Disables the popup blocker in Firefox.
+--ignore-certificate-errors: Ignores SSL certificate errors, useful for testing on environments with self-signed certificates.
+--disable-notifications: Disables browser notifications.
+--disable-logging: Disables logging for the browser.
+--disable-dev-shm-usage: Disables the use of /dev/shm in shared memory mode.
+--disable-web-security: Disables web security features, allowing cross-origin requests from local files.
+--disable-impl-side-painting: Disables the use of impl-side painting.
+--lang: Sets the language for the browser UI. ex: "--lang=fr"
+--disable-background-networking: Disables networking components running in the background.
+--disable-background-timer-throttling: Disables throttling of timer wake-ups in background pages.
+--disable-backgrounding-occluded-windows: Disables backgrounding processes of windows when they're occluded.
+--disable-breakpad: Disables the crash reporting system.
+--disable-client-side-phishing-detection: Disables client-side phishing detection.
+--disable-default-apps: Disables installation of default apps on first run.
+--disable-hang-monitor: Disables the hang monitor.
+--disable-hyperlink-auditing: Disables hyperlink auditing.
+--disable-ipc-flooding-protection: Disables IPC flooding protection.
+--disable-prompt-on-repost: Disables prompting on form resubmission.
+--disable-sync: Disables syncing browser data to a Google account.
+--disable-translate: Disables the translation feature.
+--no-default-browser-check: Disables the default browser check.
+--disable-software-rasterizer: Disables the software rasterizer, using only the GPU for rendering.
+--disable-webgl: Disables WebGL support.
+--ignore-certificate-errors: Ignores certificate errors, allowing insecure HTTPS connections.

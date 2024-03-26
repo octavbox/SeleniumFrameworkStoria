@@ -12,9 +12,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.util.Properties;
 import java.util.Random;
 
 
@@ -25,68 +25,76 @@ public class LoggedInActions {
     RoLoginPage loginPage;
     RoRezultatePage roRezultatePage;
     SalvatAnunturiPage salvatAnunturiPage;
-    Properties properties;
-    Config props = new Config(properties);
-    int maxHearts;
+    Config config = new Config();
+    int maxHearts; // Used in Scenario: User can Add and Remove items from Favourites
 
     public LoggedInActions() {
         driver = Hooks.getDriver();
         random = new Random();
+        //Web page:
         mainPage = new MainPage(driver);
         loginPage = new RoLoginPage(driver);
         roRezultatePage = new RoRezultatePage(driver);
         salvatAnunturiPage = new SalvatAnunturiPage(driver);
-    }
 
+    }
 
     //<Background>
     @Given("the user is logged in")
     public void the_user_is_logged_in() throws InterruptedException {
         mainPage.pressContulMeu();
-        loginPage.enterEmail(props.getProperty("username"));
-        loginPage.enterPassword(props.getProperty("password"));
+        loginPage.enterEmail(config.getProperty("username"));
+        loginPage.enterPassword(config.getProperty("password"));
         loginPage.pressAutentificareButton();
         Assert.assertEquals(driver.getTitle(), "Intră în cont");
         Thread.sleep(1000);
     }
     //</Background>
 
+
+    //Scenario: User logs out of their account
     @When("the user clicks on User Menu button")
     public void the_user_clicks_on_User_Menu_button() {
         mainPage.pressUserMenu();
     }
+
     @And("the user clicks on Logout button")
     public void the_user_clicks_on_Logout_button() throws InterruptedException {
         mainPage.pressLogout();
         Thread.sleep(3000);
     }
+
     @Then("the user should be logged out")
     public void the_user_should_be_logged_out() {
         Assert.assertTrue(driver.findElement(By.cssSelector(".edaxo2a3 > a:nth-child(1) > span:nth-child(2)")).isDisplayed());
     }
+
     @And("the user should be redirected to the homepage")
     public void the_user_should_be_redirected_to_the_homepage() {
         Assert.assertEquals(driver.getTitle(), "Storia.ro - anunțuri imobiliare pentru apartamente, case, terenuri");
     }
 
+
+    //Scenario: User can Add and Remove items from Favourites
     @When("the user clicks on multiple Heart buttons")
     public void the_user_clicks_on_multiple_heart_buttons() throws InterruptedException {
         maxHearts = random.nextInt(4) + 1;
-        for(int i = 0; i < maxHearts; i++){
+        for (int i = 0; i < maxHearts; i++) {
             roRezultatePage.pressHeartAt(i);
         }
         Thread.sleep(1000);
     }
+
     @Then("the selected Heart buttons are filled")
-    public void the_selected_heart_buttons_are_filled() throws InterruptedException {
+    public void the_selected_heart_buttons_are_filled() {
         int c = 0;
-        for(int i = 0; i < maxHearts; i++){
-            if(roRezultatePage.getHeartStateAt(i))
+        for (int i = 0; i < maxHearts; i++) {
+            if (roRezultatePage.getHeartStateAt(i))
                 c++;
         }
-        Assert.assertEquals(c,maxHearts);
-        Thread.sleep(5000);
+        Assert.assertEquals(c, maxHearts);
     }
+
     @Then("the Favourites button counter contains the number of selected items")
     public void the_favourites_button_counter_contains_the_number_of_selected_items() {
         System.out.println("Read attribute of pseudo-element to be implemented");
@@ -97,39 +105,44 @@ public class LoggedInActions {
          */
 
     }
+
     @When("the user clicks on the Favourites dropdown")
     public void the_user_clicks_on_the_favourites_dropdown() {
         mainPage.pressFavourites();
     }
+
     @When("the Anunturi counter contains the number of selected items")
     public void the_anunturi_counter_contains_the_number_of_selected_items() {
-        Assert.assertEquals(mainPage.getAnunturiCounter(),maxHearts);
+        Assert.assertEquals(mainPage.getAnunturiCounter(), maxHearts);
     }
+
     @When("the user clicks on the Anunturi button")
     public void the_user_clicks_on_the_anunturi_button() throws InterruptedException {
         mainPage.pressAnunturi();
         Thread.sleep(2000);
     }
+
     @Then("the Saved page appears")
     public void the_saved_page_appears() {
-        System.out.println("step");
+        Assert.assertEquals(driver.getTitle(),"Salvate");
     }
+
     @Then("the Anunturi tab counter contains the number of selected items")
     public void the_anunturi_tab_counter_contains_the_number_of_selected_items() {
-        System.out.println("step");
+        Assert.assertEquals(salvatAnunturiPage.getCounterFromAnunturiTab(),maxHearts);
     }
-    @When("the user clicks all the Heart buttons")
-    public void the_user_clicks_all_the_heart_buttons() throws InterruptedException {
-        for(int i = 0; i < maxHearts; i++){
+
+    @When("the user clicks the Heart button on all items")
+    public void the_user_clicks_the_Heart_button_on_all_items() throws InterruptedException {
+        for (int i = 0; i < maxHearts; i++) {
             salvatAnunturiPage.pressHeartAt(0);
             Thread.sleep(1000);
         }
-
     }
 
-    @Then("the Anunturi tab counter contains zero items")
-    public void the_anunturi_tab_counter_contains_zero_items() {
-        System.out.println("step");
+    @Then("the Anunturi tab is empty")
+    public void the_anunturi_tab_is_empty() {
+        Assert.assertEquals(0,salvatAnunturiPage.getListCountFromSavedListings());
     }
 
 

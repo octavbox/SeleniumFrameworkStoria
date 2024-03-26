@@ -8,11 +8,6 @@ public class Config {
     static Properties props;
     static String projectPath = System.getProperty("user.dir");
 
-    //CONSTRUCTOR
-    public Config(Properties props) {
-        this.props = props;
-    }
-
     public String getProperty(String key) {
         props = new Properties();
         try {

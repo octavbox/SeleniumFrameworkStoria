@@ -21,9 +21,9 @@ Feature:  Multi-criteria Property Search
     Examples:
       | propertyType | transactionType | city      | radius | priceMin | priceMax | areaMin | areaMax |
       | Case         | De închiriat    | Bucuresti | 5 km   | 100      | 500      |         | 100     |
-#      | Garsoniere   | De vânzare      | Brasov    | 5 km   |          |          | 40      |         |
-#      | Apartamente  | De închiriat    | Timisoara | 10 km  |          | 300      | 50      |         |
-#      | Terenuri     | De vânzare      | Iasi      | 15 km  |          | 10000    |         |         |
-#      | garsoniere   | De închiriat    | Cluj      | 25 km  | 200      |          |         |         |
-#      | Garaje       | De vânzare      | Constanta | 50 km  |          | 500      |         |         |
-#      | Case         | De închiriat    |           | 75 km  | 2000     |          |         |         |
+      | Garsoniere   | De vânzare      | Brasov    | 5 km   |          |          | 40      |         |
+      | Apartamente  | De închiriat    | Timisoara | 10 km  |          | 300      | 50      |         |
+      | Terenuri     | De vânzare      | Iasi      | 15 km  |          | 10000    |         |         |
+      | garsoniere   | De închiriat    | Cluj      | 25 km  | 200      |          |         |         |
+      | Garaje       | De vânzare      | Constanta | 50 km  |          | 500      |         |         |
+      | Case         | De închiriat    |           | 75 km  | 2000     |          |         |         |

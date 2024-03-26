@@ -20,5 +20,6 @@ public class CucumberReporting {
 
                 ReportBuilder reportBuilder = new ReportBuilder(jsonInput, configuration);
                 reportBuilder.generateReports();
+
     }
 }
