@@ -19,7 +19,7 @@ public class RoRezultatePage {
 
     //SEARCH RESULTS HEADER
     @FindBy(css = "[data-cy='search-listing.heading']")
-    private WebElement fix_title;
+    private WebElement fix_searchListingHeading;
     @FindBy(css = ".css-o0w5yo.e1fw9pn56")
     private WebElement fix_nrAnunturi;
 
@@ -27,9 +27,8 @@ public class RoRezultatePage {
         String text = fix_nrAnunturi.getText().substring(8).replaceAll("[^0-9]","");
         return Integer.parseInt(text);
     }
-    public String getSearchTitle(){
-        String text = fix_title.getText();
-        return text;
+    public String getSearchListingHeading(){
+        return fix_searchListingHeading.getText();
     }
 
     //SEARCH RESULTS
@@ -40,8 +39,8 @@ public class RoRezultatePage {
         hearts.get(index).click();
     }
     public boolean getHeartStateAt(int index){
-        String subscribedValue = hearts.get(index).getAttribute("data-cy-subscribed");
-        boolean isPressed = Boolean.parseBoolean(subscribedValue);
+        String subscribedValue = hearts.get(index).getAttribute("data-cy-subscribed"); //Returns "true" or "false" as strings.
+        boolean isPressed = Boolean.parseBoolean(subscribedValue); //Converts strings to boolean value.
         return isPressed;
 
         /*When you use @FindAll (or similar annotations like @FindBy) to initialize a list of web elements in a page object,

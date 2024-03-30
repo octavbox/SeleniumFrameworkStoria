@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public class Config {
     static Properties props;
-    static String projectPath = System.getProperty("user.dir");
+    public static String projectPath = System.getProperty("user.dir");
 
     public String getProperty(String key) {
         props = new Properties();

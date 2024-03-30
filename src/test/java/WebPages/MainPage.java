@@ -1,5 +1,6 @@
 package WebPages;
 
+import UtilityClasses.StrTools;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +23,7 @@ public class MainPage {
     // TOP ROW BUTTONS
     @FindBy(css = ".css-114aita > img")
     private WebElement btn_logo;
-    @FindBy(css = "#sell > span")
+    @FindBy(id = "sell-container")
     private WebElement btn_deVanzare;
     @FindBy(css = "#rent > span")
     private WebElement btn_deInchiriat;
@@ -41,6 +42,10 @@ public class MainPage {
 
     public void pressDeVanzare() {
         btn_deVanzare.click();
+    }
+    public void pressDeVanzareItem(String value){
+        String modifiedValue = StrTools.replaceSpaceWithNBSP(value);
+        driver.findElement(By.xpath(String.format("//li/a[text()='%s']",modifiedValue))).click();
     }
 
     public void pressDeInchiriat() {

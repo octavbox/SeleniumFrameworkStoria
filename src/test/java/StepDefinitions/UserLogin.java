@@ -23,7 +23,6 @@ public class UserLogin {
 
     public UserLogin() {
         driver = Hooks.getDriver();
-        //Web page:
         mainPage = new MainPage(driver);
         roLoginPage = new RoLoginPage(driver);
     }

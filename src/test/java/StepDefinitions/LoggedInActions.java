@@ -31,7 +31,6 @@ public class LoggedInActions {
     public LoggedInActions() {
         driver = Hooks.getDriver();
         random = new Random();
-        //Web page:
         mainPage = new MainPage(driver);
         loginPage = new RoLoginPage(driver);
         roRezultatePage = new RoRezultatePage(driver);

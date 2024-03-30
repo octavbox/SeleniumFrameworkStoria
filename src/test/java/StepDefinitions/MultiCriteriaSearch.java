@@ -1,6 +1,7 @@
 package StepDefinitions;
 
 import UtilityClasses.Hooks;
+import UtilityClasses.StrTools;
 import WebPages.MainPage;
 import WebPages.RoRezultatePage;
 import io.cucumber.java.en.And;
@@ -18,7 +19,6 @@ public class MultiCriteriaSearch {
 
     public MultiCriteriaSearch() {
         driver = Hooks.getDriver();
-        //Web page:
         mainPage = new MainPage(driver);
         searchResultsPage = new RoRezultatePage(driver);
     }
@@ -78,18 +78,33 @@ public class MultiCriteriaSearch {
         mainPage.pressSearchButton();
     }
 
-    @Then("the search results page appears")
-    public void the_search_results_page_appears() {
-        Assert.assertEquals(driver.getTitle(), "Storia.ro - anunțuri imobiliare pentru apartamente, case, terenuri");
+    @Then("the search results page title contains {string} {string} {string}")
+    public void the_search_results_title_page_contains(String propertyType, String transactionType, String city) {
+        String pageTitle = driver.getTitle();
+        String modifiedTransactionType = StrTools.makeFirstCharLowerCase(transactionType);
+        String modifiedCity = "";
+        if(!city.isBlank()) {
+            modifiedCity = ": " + StrTools.removeDiacriticsFromST(city);
+        }
+        String concatTitle = propertyType + " " + modifiedTransactionType + modifiedCity;
+        System.out.println(pageTitle + " / " + concatTitle);
+        Assert.assertTrue(pageTitle.contains(concatTitle));
     }
 
     @And("the search results match the search criteria {string} and {string} and {string}")
-    public void the_search_results_match_the_search_criteria_and_and(String propertyType, String transactionType, String city) {
-        String pageTitle = searchResultsPage.getSearchTitle();
-        String modifiedTransactionType = Character.toLowerCase(transactionType.charAt(0)) + transactionType.substring(1);
-        String concatTitle = propertyType + " " + modifiedTransactionType + ": " + city;
-        System.out.println(pageTitle + " / " + concatTitle);
-        Assert.assertEquals(pageTitle, concatTitle);
+    public void the_search_results_match_the_search_criteria(String propertyType, String transactionType, String city) {
+        String pageHeader = searchResultsPage.getSearchListingHeading();
+        String modifiedTransactionType = StrTools.makeFirstCharLowerCase(transactionType);
+        String modifiedCity;
+        if(city.isBlank()) {
+            modifiedCity = "Toată România";
+        } // If city is not filled, results from all cities (whole country) will appear.
+        else {
+            modifiedCity = StrTools.removeDiacriticsFromST(city);
+        }
+        String concatTitle = propertyType + " " + modifiedTransactionType + ": " + modifiedCity;
+        System.out.println(pageHeader + " / " + concatTitle);
+        Assert.assertEquals(pageHeader, concatTitle);
     }
 
     @And("the counter number on the search button matches the number in the search results")

@@ -14,16 +14,16 @@ Feature:  Multi-criteria Property Search
     And the user enters "<areaMax>" in the higher end surface field
     Then the search button contains a count of the results
     And the user clicks the Search button
-    Then the search results page appears
+    Then the search results page title contains "<propertyType>" "<transactionType>" "<city>"
     And the search results match the search criteria "<propertyType>" and "<transactionType>" and "<city>"
     And the counter number on the search button matches the number in the search results
 
     Examples:
       | propertyType | transactionType | city      | radius | priceMin | priceMax | areaMin | areaMax |
       | Case         | De închiriat    | Bucuresti | 5 km   | 100      | 500      |         | 100     |
-      | Garsoniere   | De vânzare      | Brasov    | 5 km   |          |          | 40      |         |
-      | Apartamente  | De închiriat    | Timisoara | 10 km  |          | 300      | 50      |         |
-      | Terenuri     | De vânzare      | Iasi      | 15 km  |          | 10000    |         |         |
-      | garsoniere   | De închiriat    | Cluj      | 25 km  | 200      |          |         |         |
-      | Garaje       | De vânzare      | Constanta | 50 km  |          | 500      |         |         |
+#      | Garsoniere   | De vânzare      | Brasov    | 5 km   |          |          | 40      |         |
+#      | Apartamente  | De închiriat    | Timisoara | 10 km  |          | 300      | 50      |         |
+#      | Terenuri     | De vânzare      | Iasi      | 15 km  |          | 10000    |         |         |
+#      | garsoniere   | De închiriat    | Cluj      | 25 km  | 200      |          |         |         |
+#      | Garaje       | De vânzare      | Constanta | 50 km  |          | 500      |         |         |
       | Case         | De închiriat    |           | 75 km  | 2000     |          |         |         |

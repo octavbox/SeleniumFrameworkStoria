@@ -9,7 +9,11 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -18,19 +22,24 @@ public class HiddenWebElement {
     static MainPage mainPage;
     static StartPage startPage;
     static RoLoginPage loginPage;
+    static WebDriverWait wait;
 
     public static void main(String[] args) {
-        heart();
+        findHidden();
     }
 
 
     public static void findHidden(){
         driver = new FirefoxDriver();
+        startPage = new StartPage(driver);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://www.storia.ro");
-        mainPage = new MainPage(driver);
-        startPage.pressAccept();
+        wait.until(ExpectedConditions.visibilityOfElementLocated((By) driver.findElement(By.id("onetrust-accept-btn-handler"))));
+        driver.findElement(By.id("onetrust-accept-btn-handler")).click();
+
         driver.findElement(By.cssSelector("[data-cy='search-form--field--transaction']")).click();
         String text = driver.getPageSource().toString();
         System.out.println(text);

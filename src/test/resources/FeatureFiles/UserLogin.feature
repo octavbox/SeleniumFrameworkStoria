@@ -1,5 +1,5 @@
-Feature: User Login
 
+Feature: User Login
   Background:
     Given Storia main page is visible
 
