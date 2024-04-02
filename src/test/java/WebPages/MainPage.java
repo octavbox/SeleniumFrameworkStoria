@@ -36,15 +36,8 @@ public class MainPage {
     @FindBy(css = ".edaxo2a3 > a:nth-child(1) > span:nth-child(2)")
     private WebElement btn_contulMeu;
 
-    public void pressUpperButtonsItem_NBSP(String value){
-        String modifiedValue = StrTools.replaceSpaceWithNBSP(value);
-        driver.findElement(By.xpath(String.format("//ul/li/a[contains(text(), '%s')]",modifiedValue))).click();
-    }
-    public void pressUpperButtonsItem_Space(String value){
-//        String modifiedValue = StrTools.replaceSpaceWithNBSP(value);
-        driver.findElement(By.xpath(String.format("//ul/li/a[contains(text(), '%s')]",value))).click();
-    }
 
+///html/body/div[1]/div[1]/div/div/div[1]/div/nav/ul/li[2]/div/div/div/ul/li[2]/ul/li[1]/a
     public void pressLogo() {
         btn_logo.click();
     }
@@ -52,9 +45,26 @@ public class MainPage {
     public void pressDeVanzare() {
         btn_deVanzare.click();
     }
-
+    public void pressButtonOfDeVanzare(String value){
+        try{
+            driver.findElement(By.xpath(String.format("//ul/li[1]//a[contains(text(), '%s')]",value))).click();
+        }catch (Exception e){
+            System.out.println("1st try failed, now replacing spaces with NBSP");
+            String modifiedValue = StrTools.replaceSpaceWithNBSP(value);
+            driver.findElement(By.xpath(String.format("//ul/li[1]//a[contains(text(), '%s')]",modifiedValue))).click();
+        }
+    }
     public void pressDeInchiriat() {
         btn_deInchiriat.click();
+    }
+    public void pressButtonOfDeInchiriat(String value){
+        try{
+            driver.findElement(By.xpath(String.format("//ul/li[2]//a[contains(text(), '%s')]",value))).click();
+        }catch (Exception e){
+            System.out.println("1st try failed, now replacing spaces with NBSP");
+            String modifiedValue = StrTools.replaceSpaceWithNBSP(value);
+            driver.findElement(By.xpath(String.format("//ul/li[2]//a[contains(text(), '%s')]",modifiedValue))).click();
+        }
     }
 
     public void pressAnsambluRez() {

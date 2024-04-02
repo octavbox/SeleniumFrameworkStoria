@@ -28,18 +28,19 @@ public class UpperButtons {
     public void the_user_clicks_on_de_vanzare_dropdown_button() {
         mainPage.pressDeVanzare();
     }
+    @And("the user clicks the {string} button of De Vanzare")
+    public void the_user_clicks_the_button_of_de_vanzare(String button) {
+        mainPage.pressButtonOfDeVanzare(button);
+    }
     @When("the user clicks on De Inchiriat dropdown button")
     public void the_user_clicks_on_de_inchiriat_dropdown_button() {
         mainPage.pressDeInchiriat();
     }
-    @And("the user clicks the {string} button NBSP")
-    public void the_user_clicks_the_button_NBSP(String button) {
-        mainPage.pressUpperButtonsItem_NBSP(button);
+    @And("the user clicks the {string} button of De Inchiriat")
+    public void the_user_clicks_the_button_of_de_inchiriat(String button) {
+        mainPage.pressButtonOfDeInchiriat(button);
     }
-    @When("the user clicks the {string} button")
-    public void the_user_clicks_the_button(String blogPost) {
-        mainPage.pressUpperButtonsItem_Space(blogPost);
-    }
+
     @Then("the blog post title contains {string}")
     public void the_blog_post_title_contains(String blogPost) {
         String pageTitle = driver.getTitle();
