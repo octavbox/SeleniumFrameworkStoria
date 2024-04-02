@@ -25,7 +25,7 @@ public class MainPage {
     private WebElement btn_logo;
     @FindBy(id = "sell-container")
     private WebElement btn_deVanzare;
-    @FindBy(css = "#rent > span")
+    @FindBy(id = "rent-container")
     private WebElement btn_deInchiriat;
     @FindBy(css = "#primaryMarket > span")
     private WebElement btn_ansambluriRezidentiale;
@@ -36,16 +36,21 @@ public class MainPage {
     @FindBy(css = ".edaxo2a3 > a:nth-child(1) > span:nth-child(2)")
     private WebElement btn_contulMeu;
 
+    public void pressUpperButtonsItem_NBSP(String value){
+        String modifiedValue = StrTools.replaceSpaceWithNBSP(value);
+        driver.findElement(By.xpath(String.format("//ul/li/a[contains(text(), '%s')]",modifiedValue))).click();
+    }
+    public void pressUpperButtonsItem_Space(String value){
+//        String modifiedValue = StrTools.replaceSpaceWithNBSP(value);
+        driver.findElement(By.xpath(String.format("//ul/li/a[contains(text(), '%s')]",value))).click();
+    }
+
     public void pressLogo() {
         btn_logo.click();
     }
 
     public void pressDeVanzare() {
         btn_deVanzare.click();
-    }
-    public void pressDeVanzareItem(String value){
-        String modifiedValue = StrTools.replaceSpaceWithNBSP(value);
-        driver.findElement(By.xpath(String.format("//li/a[text()='%s']",modifiedValue))).click();
     }
 
     public void pressDeInchiriat() {
