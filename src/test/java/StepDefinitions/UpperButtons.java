@@ -1,6 +1,5 @@
 package StepDefinitions;
 
-import Configuration.Config;
 import UtilityClasses.Hooks;
 import UtilityClasses.StrTools;
 import WebPages.MainPage;
@@ -16,7 +15,6 @@ public class UpperButtons {
     WebDriver driver;
     MainPage mainPage;
     RoRezultatePage roRezultatePage;
-    Config config = new Config();
 
     public UpperButtons() {
         driver = Hooks.getDriver();
@@ -24,29 +22,34 @@ public class UpperButtons {
         roRezultatePage = new RoRezultatePage(driver);
     }
 
-    @When("the user clicks on De Vanzare dropdown button")
-    public void the_user_clicks_on_de_vanzare_dropdown_button() {
-        mainPage.pressDeVanzare();
-    }
-    @And("the user clicks the {string} button of De Vanzare")
-    public void the_user_clicks_the_button_of_de_vanzare(String button) {
-        mainPage.pressButtonOfDeVanzare(button);
-    }
-    @When("the user clicks on De Inchiriat dropdown button")
-    public void the_user_clicks_on_de_inchiriat_dropdown_button() {
-        mainPage.pressDeInchiriat();
-    }
-    @And("the user clicks the {string} button of De Inchiriat")
-    public void the_user_clicks_the_button_of_de_inchiriat(String button) {
-        mainPage.pressButtonOfDeInchiriat(button);
+    @When("the user clicks on {string} dropdown from upper buttons")
+    public void the_user_clicks_on_dropdown_from_upper_buttons(String dropDownName) {
+        mainPage.pressUpperButton(dropDownName);
     }
 
-    @Then("the blog post title contains {string}")
+    @And("the user clicks the {string} item")
+    public void the_user_clicks_the_item_of_upper_buttons(String button) {
+        mainPage.pressItemOfUpperButtons(button);
+    }
+
+    @Then("the webpage title contains {string}")
     public void the_blog_post_title_contains(String blogPost) {
         String pageTitle = driver.getTitle();
-        String modifiedBlogPost = StrTools.removeDiacriticsFromAll(blogPost);
-        System.out.println(pageTitle + " / " + modifiedBlogPost);
-        Assert.assertTrue(pageTitle.contains(modifiedBlogPost));
+        try {
+            System.out.println(pageTitle + " / " + blogPost);
+            Assert.assertTrue(pageTitle.contains(blogPost));
+
+        } catch (AssertionError e) {
+            System.out.println("Removing diacritics...");
+
+            String modifiedBlogPost = StrTools.removeDiacriticsFromAll(blogPost);
+            String modifiedPageTitle = StrTools.removeDiacriticsFromAll(pageTitle);
+            System.out.println(modifiedPageTitle + " / " + modifiedBlogPost);
+
+            Assert.assertTrue(modifiedPageTitle.contains(modifiedBlogPost));
+        }
+
+
     }
 
 }

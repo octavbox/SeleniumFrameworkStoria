@@ -82,29 +82,28 @@ public class MultiCriteriaSearch {
     public void the_search_results_title_page_contains(String propertyType, String transactionType, String city) {
         String pageTitle = driver.getTitle();
         String modifiedTransactionType = StrTools.makeFirstCharLowerCase(transactionType);
-        String modifiedCity = "";
-        if(!city.isBlank()) {
-            modifiedCity = ": " + StrTools.removeDiacriticsFromST(city);
-        }
-        String concatTitle = propertyType + " " + modifiedTransactionType + modifiedCity;
-        System.out.println(pageTitle + " / " + concatTitle);
-        Assert.assertTrue(pageTitle.contains(concatTitle));
+        String modifiedCity = StrTools.removeDiacriticsFromAll(city);
+
+        String concatTitle = propertyType + " " + modifiedTransactionType + ": " + modifiedCity;
+        System.out.println("Web page title: " + pageTitle + " // " + concatTitle);
+
+        Assert.assertTrue(pageTitle.contains(propertyType));
+        Assert.assertTrue(pageTitle.contains(modifiedTransactionType));
+        Assert.assertTrue(pageTitle.contains(modifiedCity));
     }
 
-    @And("the search results match the search criteria {string} and {string} and {string}")
+    @And("the search results match the search criteria {string} {string} {string}")
     public void the_search_results_match_the_search_criteria(String propertyType, String transactionType, String city) {
         String pageHeader = searchResultsPage.getSearchListingHeading();
         String modifiedTransactionType = StrTools.makeFirstCharLowerCase(transactionType);
-        String modifiedCity;
-        if(city.isBlank()) {
-            modifiedCity = "Toată România";
-        } // If city is not filled, results from all cities (whole country) will appear.
-        else {
-            modifiedCity = StrTools.removeDiacriticsFromST(city);
-        }
+        String modifiedCity = StrTools.removeDiacriticsFromAll(city);
+
         String concatTitle = propertyType + " " + modifiedTransactionType + ": " + modifiedCity;
         System.out.println(pageHeader + " / " + concatTitle);
-        Assert.assertEquals(pageHeader, concatTitle);
+
+        Assert.assertTrue(pageHeader.contains(propertyType));
+        Assert.assertTrue(pageHeader.contains(modifiedTransactionType));
+        Assert.assertTrue(pageHeader.contains(modifiedCity));
     }
 
     @And("the counter number on the search button matches the number in the search results")

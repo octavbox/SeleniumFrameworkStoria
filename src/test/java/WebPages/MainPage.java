@@ -2,7 +2,6 @@ package WebPages;
 
 import UtilityClasses.StrTools;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,13 +11,12 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MainPage {
     WebDriver driver;
-    JavascriptExecutor js;
+    WebElement selectedUpperButton;
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
-
 
     // TOP ROW BUTTONS
     @FindBy(css = ".css-114aita > img")
@@ -27,62 +25,60 @@ public class MainPage {
     private WebElement btn_deVanzare;
     @FindBy(id = "rent-container")
     private WebElement btn_deInchiriat;
-    @FindBy(css = "#primaryMarket > span")
+    @FindBy(id = "primaryMarket-container")
     private WebElement btn_ansambluriRezidentiale;
-    @FindBy(css = "#companies > span")
+    @FindBy(id = "companies-container")
     private WebElement btn_companii;
     @FindBy(id = "finance")
     private WebElement btn_creditare;
     @FindBy(css = ".edaxo2a3 > a:nth-child(1) > span:nth-child(2)")
     private WebElement btn_contulMeu;
 
-
-///html/body/div[1]/div[1]/div/div/div[1]/div/nav/ul/li[2]/div/div/div/ul/li[2]/ul/li[1]/a
     public void pressLogo() {
         btn_logo.click();
     }
 
-    public void pressDeVanzare() {
-        btn_deVanzare.click();
-    }
-    public void pressButtonOfDeVanzare(String value){
-        try{
-            driver.findElement(By.xpath(String.format("//ul/li[1]//a[contains(text(), '%s')]",value))).click();
-        }catch (Exception e){
-            System.out.println("1st try failed, now replacing spaces with NBSP");
-            String modifiedValue = StrTools.replaceSpaceWithNBSP(value);
-            driver.findElement(By.xpath(String.format("//ul/li[1]//a[contains(text(), '%s')]",modifiedValue))).click();
-        }
-    }
-    public void pressDeInchiriat() {
-        btn_deInchiriat.click();
-    }
-    public void pressButtonOfDeInchiriat(String value){
-        try{
-            driver.findElement(By.xpath(String.format("//ul/li[2]//a[contains(text(), '%s')]",value))).click();
-        }catch (Exception e){
-            System.out.println("1st try failed, now replacing spaces with NBSP");
-            String modifiedValue = StrTools.replaceSpaceWithNBSP(value);
-            driver.findElement(By.xpath(String.format("//ul/li[2]//a[contains(text(), '%s')]",modifiedValue))).click();
+    public void pressUpperButton(String dropDownName) {
+        switch (dropDownName) {
+            case "De Vanzare" -> {
+                selectedUpperButton = btn_deVanzare;
+                btn_deVanzare.click();
+            }
+            case "De Inchiriat" -> {
+                selectedUpperButton = btn_deInchiriat;
+                btn_deInchiriat.click();
+            }
+            case "Ansambluri Rezidentiale" -> {
+                selectedUpperButton = btn_ansambluriRezidentiale;
+                btn_ansambluriRezidentiale.click();
+            }
+            case "Companii" -> {
+                selectedUpperButton = btn_companii;
+                btn_companii.click();
+            }
         }
     }
 
-    public void pressAnsambluRez() {
-        btn_ansambluriRezidentiale.click();
+    public void pressItemOfUpperButtons(String item){
+        try{
+            String xpath = String.format(".//a[contains(text(),'%s')]", item);
+            selectedUpperButton.findElement(By.xpath(xpath)).click();
+        }catch (Exception e){
+            System.out.println("1st try failed. Replacing spaces with NBSP...");
+
+            String modifiedItem = StrTools.replaceSpaceWithNBSP(item);
+            String xpath = String.format(".//a[contains(text(),'%s')]", modifiedItem);
+            selectedUpperButton.findElement(By.xpath(xpath)).click();
+        }
     }
 
-    public void pressCompanii() {
-        btn_companii.click();
-    }
-
-    public void pressFinantare() {
+    public void pressCreditare() {
         btn_creditare.click();
     }
 
     public void pressContulMeu() {
         btn_contulMeu.click();
     }
-
 
     //LOGGED IN BUTTONS (UPPER RIGHT)
     @FindBy(xpath = "/html/body/div[1]/div[1]/div/div/div[2]/div[2]")
@@ -106,12 +102,6 @@ public class MainPage {
         drp_favourites.click();
     }
 
-    //    public int getFavouritesCounterValue(){
-//        js = (JavascriptExecutor) driver;
-//        String content = (String) js.executeScript("return window.getComputedStyle(arguments[0]).getPropertyValue('content')", drp_favourites);
-//        System.out.println(content);
-//        return Integer.parseInt(content);
-//    }
     @FindBy(css = ".css-1w8zttu.e167po0p4")
     private WebElement btn_anunturi;
     @FindBy(css = ".css-16jlbcj.e167po0p7")
