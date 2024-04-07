@@ -8,11 +8,13 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-
 
 public class UpperButtons {
     WebDriver driver;
+    private final Logger logger = LoggerFactory.getLogger(UpperButtons.class);
     MainPage mainPage;
     RoRezultatePage roRezultatePage;
 
@@ -33,23 +35,19 @@ public class UpperButtons {
     }
 
     @Then("the webpage title contains {string}")
-    public void the_blog_post_title_contains(String blogPost) {
+    public void the_blog_post_title_contains(String testTitle) {
         String pageTitle = driver.getTitle();
         try {
-            System.out.println(pageTitle + " / " + blogPost);
-            Assert.assertTrue(pageTitle.contains(blogPost));
-
+            logger.info(pageTitle + " / " + testTitle);
+            Assert.assertTrue(pageTitle.contains(testTitle));
         } catch (AssertionError e) {
-            System.out.println("Removing diacritics...");
+            logger.info("Removing diacritics from both expected and actual titles.");
 
-            String modifiedBlogPost = StrTools.removeDiacriticsFromAll(blogPost);
+            String modifiedTestTitle = StrTools.removeDiacriticsFromAll(testTitle);
             String modifiedPageTitle = StrTools.removeDiacriticsFromAll(pageTitle);
-            System.out.println(modifiedPageTitle + " / " + modifiedBlogPost);
+            logger.info(modifiedPageTitle + " / " + modifiedTestTitle);
 
-            Assert.assertTrue(modifiedPageTitle.contains(modifiedBlogPost));
+            Assert.assertTrue(modifiedPageTitle.contains(modifiedTestTitle));
         }
-
-
     }
-
 }

@@ -7,8 +7,8 @@ Feature: Logged In Actions
   Scenario: User logs out of their account
     When the user clicks on User Menu button
     And the user clicks on Logout button
-    Then the user should be logged out
-    And the user should be redirected to the homepage
+    Then the user is logged out
+    And the user is redirected to the homepage
 
 
   Scenario: User can Add and Remove items from Favourites

@@ -19,7 +19,4 @@ import io.cucumber.testng.CucumberOptions;
                 "html:target/Reports/Cucumber-reports-html/cucumber-reports",
                 "json:target/Reports/Cucumber-reports-json/cucumber-reports"}
 )
-
-public class TestNGTestRunner extends AbstractTestNGCucumberTests {
-
-}
+public class TestNGTestRunner extends AbstractTestNGCucumberTests {}

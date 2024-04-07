@@ -12,7 +12,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 import java.util.Random;
@@ -20,6 +21,7 @@ import java.util.Random;
 
 public class LoggedInActions {
     WebDriver driver;
+    private final Logger logger = LoggerFactory.getLogger(LoggedInActions.class);
     Random random;
     MainPage mainPage;
     RoLoginPage loginPage;
@@ -46,6 +48,7 @@ public class LoggedInActions {
         loginPage.enterPassword(config.getProperty("password"));
         loginPage.pressAutentificareButton();
         Assert.assertEquals(driver.getTitle(), "Intră în cont");
+        logger.info("Logged in successfully");
         Thread.sleep(1000);
     }
     //</Background>
@@ -60,16 +63,17 @@ public class LoggedInActions {
     @And("the user clicks on Logout button")
     public void the_user_clicks_on_Logout_button() throws InterruptedException {
         mainPage.pressLogout();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
     }
 
-    @Then("the user should be logged out")
-    public void the_user_should_be_logged_out() {
-        Assert.assertTrue(driver.findElement(By.cssSelector(".edaxo2a3 > a:nth-child(1) > span:nth-child(2)")).isDisplayed());
+    @Then("the user is logged out")
+    public void the_user_is_logged_out() {
+        logger.info("Checking if the 'Contul meu' button is now visible");
+        Assert.assertTrue(driver.findElement(By.xpath("//div[2]/a[@data-cy=\"navbar-my-account-button\"]")).isDisplayed());
     }
 
-    @And("the user should be redirected to the homepage")
-    public void the_user_should_be_redirected_to_the_homepage() {
+    @And("the user is redirected to the homepage")
+    public void the_user_is_redirected_to_the_homepage() {
         Assert.assertEquals(driver.getTitle(), "Storia.ro - anunțuri imobiliare pentru apartamente, case, terenuri");
     }
 
@@ -78,17 +82,18 @@ public class LoggedInActions {
     @When("the user clicks on multiple Heart buttons")
     public void the_user_clicks_on_multiple_heart_buttons() throws InterruptedException {
         maxHearts = random.nextInt(4) + 1;
+        logger.info("Number of listings that will be favourited = " + maxHearts);
         for (int i = 0; i < maxHearts; i++) {
             roRezultatePage.pressHeartAt(i);
         }
-        Thread.sleep(1000);
+        Thread.sleep(500);
     }
 
     @Then("the selected Heart buttons are filled")
     public void the_selected_heart_buttons_are_filled() {
         int c = 0;
         for (int i = 0; i < maxHearts; i++) {
-            if (roRezultatePage.getHeartStateAt(i))
+            if (roRezultatePage.getHeartStateAt(i)) //returns true if Heart is pressed.
                 c++;
         }
         Assert.assertEquals(c, maxHearts);
@@ -141,8 +146,8 @@ public class LoggedInActions {
 
     @Then("the Anunturi tab is empty")
     public void the_anunturi_tab_is_empty() {
-        Assert.assertEquals(0,salvatAnunturiPage.getListCountFromSavedListings());
+        int count = salvatAnunturiPage.getListCountFromSavedListings();
+        logger.debug("Expecting 0 but found " + count + "listings.");
+        Assert.assertEquals(0,count);
     }
-
-
 }

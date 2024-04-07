@@ -5,22 +5,25 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 // https://www.storia.ro/rezultate
 public class RoRezultatePage {
     WebDriver driver;
+    private final Logger logger = LoggerFactory.getLogger(RoRezultatePage.class);
     public RoRezultatePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver,this);
     }
 
-
-    //SEARCH RESULTS HEADER
-    @FindBy(css = "[data-cy='search-listing.heading']")
+    //________________________________________________SEARCH RESULTS HEADER_______________________________________________________
+    final String searchListingHeadingXpath = "//h1[@data-cy='search-listing.heading']";
+    @FindBy(xpath = searchListingHeadingXpath)
     private WebElement fix_searchListingHeading;
-    @FindBy(css = ".css-o0w5yo.e1fw9pn56")
+    @FindBy(xpath = searchListingHeadingXpath + "/following-sibling::div/div")
     private WebElement fix_nrAnunturi;
 
     public int getCounterFromAnunturi() {
@@ -31,7 +34,8 @@ public class RoRezultatePage {
         return fix_searchListingHeading.getText();
     }
 
-    //SEARCH RESULTS
+
+    //________________________________________________SEARCH RESULTS_______________________________________________________
     @FindAll({@FindBy(css = "[data-cy='listing-subscribe-button.subscribe']")})
     private List<WebElement> hearts;
 
@@ -55,7 +59,5 @@ public class RoRezultatePage {
         This means that WebDriver queries the browser to get the most up-to-date attribute values of the element
         at the moment when the method is called.*/
     }
-
-
 
 }

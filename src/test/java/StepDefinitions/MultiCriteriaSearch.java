@@ -8,14 +8,17 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 public class MultiCriteriaSearch {
 
     WebDriver driver;
+    private final Logger logger = LoggerFactory.getLogger(MultiCriteriaSearch.class);
     MainPage mainPage;
     RoRezultatePage searchResultsPage;
-    int counter1;
+    int buttonCounter;
 
     public MultiCriteriaSearch() {
         driver = Hooks.getDriver();
@@ -41,7 +44,7 @@ public class MultiCriteriaSearch {
     @And("the user selects {string} from the city dropdown")
     public void the_user_selects_from_the_city_dropdown(String city) {
         if (city.isBlank()) {
-            System.out.println("No city selected");
+            logger.info("No city selected");
         } else {
             mainPage.enterLocationOption(city);
         }
@@ -70,7 +73,8 @@ public class MultiCriteriaSearch {
     @Then("the search button contains a count of the results")
     public void the_search_button_contains_a_count_of_the_results() throws InterruptedException {
         Thread.sleep(1000);
-        counter1 = mainPage.getCounterFromSearchButton();
+        buttonCounter = mainPage.getCounterFromSearchButton();
+        logger.info("Search button counter displayed " + buttonCounter +" listings.");
     }
 
     @When("the user clicks the Search button")
@@ -85,7 +89,7 @@ public class MultiCriteriaSearch {
         String modifiedCity = StrTools.removeDiacriticsFromAll(city);
 
         String concatTitle = propertyType + " " + modifiedTransactionType + ": " + modifiedCity;
-        System.out.println("Web page title: " + pageTitle + " // " + concatTitle);
+        logger.debug("Page title: " + pageTitle + " // " + concatTitle);
 
         Assert.assertTrue(pageTitle.contains(propertyType));
         Assert.assertTrue(pageTitle.contains(modifiedTransactionType));
@@ -99,7 +103,7 @@ public class MultiCriteriaSearch {
         String modifiedCity = StrTools.removeDiacriticsFromAll(city);
 
         String concatTitle = propertyType + " " + modifiedTransactionType + ": " + modifiedCity;
-        System.out.println(pageHeader + " / " + concatTitle);
+        logger.debug("Page header: " + pageHeader + " / " + concatTitle);
 
         Assert.assertTrue(pageHeader.contains(propertyType));
         Assert.assertTrue(pageHeader.contains(modifiedTransactionType));
@@ -108,7 +112,8 @@ public class MultiCriteriaSearch {
 
     @And("the counter number on the search button matches the number in the search results")
     public void the_counter_number_on_the_search_button_matches_the_number_in_the_search_results() {
-        Assert.assertEquals(counter1, searchResultsPage.getCounterFromAnunturi());
-        System.out.println("Search counter: " + counter1);
+        int resultsCounter = searchResultsPage.getCounterFromAnunturi();
+        Assert.assertEquals(buttonCounter, resultsCounter);
+        logger.info("Search results counter displayed " + resultsCounter +" listings.");
     }
 }

@@ -1,0 +1,41 @@
+<configuration>
+
+    <!-- Console Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File Appender -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>target/Logs/mylog.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Root Logger Configuration -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/> <!-- Attach console appender -->
+        <appender-ref ref="FILE"/>    <!-- Attach file appender -->
+    </root>
+
+</configuration>
+
+<!--        TRACE: The lowest logging level. Used for very detailed information, typically used for debugging purposes.-->
+<!--            Trace messages are the most detailed and provide insights into the internal workings of your application.-->
+
+<!--        DEBUG: Used for debugging information that is useful during development and debugging stages.-->
+<!--            Debug messages provide more information than trace messages but less than info messages.-->
+<!--            These messages are generally used to track the flow of the application and identify issues during development.-->
+
+<!--        INFO: Used to provide information about the normal operation of the application.-->
+<!--            These messages are typically used to provide status updates or important information about the application's execution.-->
+
+<!--        WARN: Used to indicate potential issues or situations that might require attention.-->
+<!--            These messages are not errors but could indicate situations that need to be monitored or investigated further.-->
+
+<!--        ERROR: The highest logging level. Used to indicate errors or exceptional conditions that require immediate attention.-->
+<!--            Error messages typically indicate issues that need to be addressed as they can impact the functionality or-->
+<!--            stability of the application.-->

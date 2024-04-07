@@ -14,18 +14,18 @@ public class RoLoginPage {
         PageFactory.initElements(driver,this);
     }
 
-    //TAB AUTENTIFICARE
-    @FindBy(className = "css-1smixo2")
+    //________________________________________________TAB AUTENTIFICARE_______________________________________________________
+    @FindBy(xpath = "//div/div[1]/header/button[1]")
     private WebElement btn_autentificareTab;
     @FindBy(id = "username")
     private WebElement txt_emailField;
     @FindBy(id = "password")
     private WebElement txt_passField;
-    @FindBy(className = "css-1f5c5n2")
+    @FindBy(xpath = "//fieldset/div[2]/div/div/button/span/span")
     private WebElement btn_hiddenEye;
-    @FindBy(className = "css-1ie4kvm")
+    @FindBy(xpath = "//a[@href=\"/ro/login/reset\"]")
     private WebElement btn_forgotPassword;
-    @FindBy(className = "e1msim225")
+    @FindBy(xpath = "//button[@type=\"submit\"]")
     private WebElement btn_autentificareButton;
 
     public void pressAutentificareTab() {
@@ -35,19 +35,18 @@ public class RoLoginPage {
     public void enterEmail(String email) {
         txt_emailField.sendKeys(email);
     }
-
     public void enterPassword(String pass) {
         txt_passField.sendKeys(pass);
     }
-
+    public String getPasswordHiddenStatus(){
+        return txt_passField.getAttribute("type");
+    }
     public void pressEye() {
         btn_hiddenEye.click();
     }
-
     public void pressForgotPassword() {
         btn_forgotPassword.click();
     }
-
     public void pressAutentificareButton() {
         btn_autentificareButton.click();
     }

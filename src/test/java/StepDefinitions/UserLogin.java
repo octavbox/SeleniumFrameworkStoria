@@ -10,12 +10,13 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-
-
 
 public class UserLogin {
     WebDriver driver;
+    private final Logger logger = LoggerFactory.getLogger(UpperButtons.class);
     MainPage mainPage;
     RoLoginPage roLoginPage;
 
@@ -27,7 +28,6 @@ public class UserLogin {
         roLoginPage = new RoLoginPage(driver);
     }
 
-
     //<Background>
     @Given("Storia main page is visible")
     public void storia_main_page_is_visible() {
@@ -35,7 +35,7 @@ public class UserLogin {
     }
     //</Background>
 
-    @When("the user is on the login page")
+    @When("the user clicks on the Contul Meu button")
     public void the_user_is_on_the_login_page() {
         mainPage.pressContulMeu();
     }
@@ -45,8 +45,21 @@ public class UserLogin {
         roLoginPage.enterEmail(props.getProperty("username"));
         roLoginPage.enterPassword(props.getProperty("password"));
     }
+    @When("the user clicks the Eye button")
+    public void the_user_clicks_the_eye_button() {
+        roLoginPage.pressEye();
 
-    @And("the user submits the login form")
+    }
+    @Then("the password is hidden")
+    public void the_password_is_hidden() {
+        Assert.assertEquals("password",roLoginPage.getPasswordHiddenStatus());
+    }
+    @Then("the password is visible")
+    public void the_password_is_visible() {
+        Assert.assertEquals("text",roLoginPage.getPasswordHiddenStatus());
+    }
+
+    @And("the user clicks the Autentificare button")
     public void the_user_submits_the_login_form() {
         roLoginPage.pressAutentificareButton();
     }

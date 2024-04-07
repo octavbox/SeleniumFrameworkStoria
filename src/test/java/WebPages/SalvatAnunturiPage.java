@@ -6,12 +6,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.List;
 
 public class SalvatAnunturiPage {
 
     WebDriver driver;
+    private final Logger logger = LoggerFactory.getLogger(SalvatAnunturiPage.class);
     JavascriptExecutor js;
 
     //CONSTRUCTOR
@@ -31,6 +33,7 @@ public class SalvatAnunturiPage {
 
     public int getCounterFromAnunturiTab() {
         String text = btn_anunturiTab.getText().replaceAll("[^0-9]", "");
+        logger.debug(text);
         return Integer.parseInt(text);
     }
 
@@ -41,15 +44,13 @@ public class SalvatAnunturiPage {
         return list_savedListings.size();
     }
 
-
     public void pressHeartAt(int index) {
         list_hearts.get(index).click();
     }
 
     public boolean getHeartStateAt(int index) {
         String subscribedValue = list_hearts.get(index).getAttribute("data-cy-subscribed");
-        boolean isPressed = Boolean.parseBoolean(subscribedValue);
-        return isPressed;
+        return Boolean.parseBoolean(subscribedValue);
     }
 
 }

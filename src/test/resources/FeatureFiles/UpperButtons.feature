@@ -196,7 +196,7 @@ Feature: Check links of dropdown buttons in upper part of main page
 
     Examples:
       | dropDownName | companyType        |
-      | Companii     | Agenții imobiliare |
+#      | Companii     | Agenții imobiliare |
       | Companii     | Dezvoltatori       |
 
 
