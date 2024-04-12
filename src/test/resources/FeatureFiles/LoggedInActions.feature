@@ -1,4 +1,4 @@
-Feature: Logged In Actions
+Feature: Perform tests on the buttons available to users that are logged in.
 
   Background:
     Given the user is logged in

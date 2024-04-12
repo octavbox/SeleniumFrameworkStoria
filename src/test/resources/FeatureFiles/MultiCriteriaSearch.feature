@@ -1,9 +1,9 @@
-Feature:  Multi-criteria Property Search
+Feature:  Perform tests on the Multi-criteria Property Search feature
 
   Background:
     Given Storia main page is visible
 
-  @Active
+
   Scenario Outline: User searches for properties
     When the user selects "<propertyType>" from the property type dropdown
     And the user selects "<transactionType>" from the transaction type dropdown

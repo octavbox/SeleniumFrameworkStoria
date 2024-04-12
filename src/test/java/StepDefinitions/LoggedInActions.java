@@ -10,7 +10,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,7 +68,7 @@ public class LoggedInActions {
     @Then("the user is logged out")
     public void the_user_is_logged_out() {
         logger.info("Checking if the 'Contul meu' button is now visible");
-        Assert.assertTrue(driver.findElement(By.xpath("//div[2]/a[@data-cy=\"navbar-my-account-button\"]")).isDisplayed());
+        Assert.assertTrue(mainPage.getBtn_contulMeu().isDisplayed());
     }
 
     @And("the user is redirected to the homepage")

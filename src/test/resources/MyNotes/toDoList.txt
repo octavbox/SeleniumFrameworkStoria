@@ -1,6 +1,6 @@
 - finish implementing driver logs for firefox and edge
+- replace Implicit Wait and Thread.sleep with Explicit Wait
 - understand how to handle pseudo-elements
 - created testNG test using Data Provider
-- create scenario to test design attributes
-- replace all necessary selectors
-- replace Implicit Wait and Thread.sleep with Explicit Wait
+- create feature to test design attributes
+- create feature to test navigation with selenium

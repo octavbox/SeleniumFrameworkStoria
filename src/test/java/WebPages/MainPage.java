@@ -1,13 +1,17 @@
 package WebPages;
 
 import UtilityClasses.StrTools;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 // https://www.storia.ro/
 
@@ -84,7 +88,7 @@ public class MainPage {
 
 
     //________________________________________________LOGGED IN BUTTONS (UPPER RIGHT)_______________________________________________________
-
+    @Getter
     @FindBy(xpath = "//div[2]/a[@data-cy=\"navbar-my-account-button\"]") //element not interactable without div[2]
     private WebElement btn_contulMeu;
 
@@ -99,8 +103,9 @@ public class MainPage {
     private WebElement drp_favourites;
     @FindBy(xpath = favouritesXpath + "/parent::a/parent::div/ul/li/a")
     private WebElement btn_anunturi;
-    @FindBy(xpath = favouritesXpath + "/parent::a/parent::div/ul/li/a/span")
-    private WebElement fix_anunturiCounter;
+    @Getter
+    @FindAll({@FindBy(xpath = favouritesXpath + "/parent::a/parent::div/ul/li/a/span")})
+    private List<WebElement> fix_anunturiCounter;
 
     public void pressContulMeu() {
         btn_contulMeu.click();
@@ -115,7 +120,7 @@ public class MainPage {
     }
 
     public int getAnunturiCounter() {
-        return Integer.parseInt(fix_anunturiCounter.getText());
+        return Integer.parseInt(fix_anunturiCounter.get(0).getText());
     }
 
     public void pressLogout() {

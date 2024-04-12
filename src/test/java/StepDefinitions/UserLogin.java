@@ -69,15 +69,27 @@ public class UserLogin {
         Assert.assertEquals(driver.getTitle(), "Intră în cont");
     }
 
-    @When("the user enters invalid login credentials")
-    public void the_user_enters_invalid_login_credentials() {
-        roLoginPage.enterEmail(props.getProperty("wrongUsername"));
-        roLoginPage.enterPassword(props.getProperty("wrongPassword"));
+    @When("the user enters invalid login credentials: {string} and {string}")
+    public void the_user_enters_invalid_login_credentials(String email, String password) {
+        roLoginPage.enterEmail(email);
+        roLoginPage.enterPassword(password);
     }
 
-    @Then("the user should see an error message")
-    public void the_user_should_see_an_error_message() {
-        Assert.assertTrue(driver.findElement(By.id("form-error-banner")).isDisplayed());
+    @Then("a message appears if email input \\({string}) is blank")
+    public void a_message_appears_if_email_input_is_blank(String email) {
+        if(email.isBlank())
+            Assert.assertTrue(roLoginPage.getFix_emailFieldErrorMessage().isDisplayed(),"Email field is blank.");
+    }
+    @Then("a message appears if password input \\({string}) is blank")
+    public void a_message_appears_if_password_input_is_blank(String password) {
+        if(password.isBlank())
+            Assert.assertTrue(roLoginPage.getFix_passFieldErrorMessage().isDisplayed(),"Password field is blank.");
+    }
+
+    @Then("an error message appears if {string} and {string} are not blank")
+    public void an_error_message_appears_if_credentials_are_not_blank(String email, String password) {
+        if(!(email.isBlank() || password.isBlank()))
+            Assert.assertTrue(driver.findElement(By.id("form-error-banner")).isDisplayed());
     }
 
     @And("the user should remain on the login page")

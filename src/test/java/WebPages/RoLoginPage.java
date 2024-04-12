@@ -1,5 +1,6 @@
 package WebPages;
 
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -19,8 +20,14 @@ public class RoLoginPage {
     private WebElement btn_autentificareTab;
     @FindBy(id = "username")
     private WebElement txt_emailField;
+    @Getter
+    @FindBy(xpath = "//fieldset/div[1]/div[2]")
+    private WebElement fix_emailFieldErrorMessage;
     @FindBy(id = "password")
     private WebElement txt_passField;
+    @Getter
+    @FindBy(xpath = "//fieldset/div[2]/div[2]")
+    private WebElement fix_passFieldErrorMessage;
     @FindBy(xpath = "//fieldset/div[2]/div/div/button/span/span")
     private WebElement btn_hiddenEye;
     @FindBy(xpath = "//a[@href=\"/ro/login/reset\"]")

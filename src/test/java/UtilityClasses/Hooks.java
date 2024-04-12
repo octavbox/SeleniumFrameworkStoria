@@ -4,6 +4,7 @@ import Configuration.Config;
 import WebPages.StartPage;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,6 +28,7 @@ public class Hooks {
     /* Before each scenario execution,the StepDefinition and Hooks classes are instantiated,
     The Webdriver instance in the Hooks class is set to static so that the Hooks instance in the StepDefinition constructor
     will receive the same WebDriver instance that was created in the Hooks class. */
+    @Getter
     static WebDriver driver;
     private final Logger logger = LoggerFactory.getLogger(Hooks.class);
     StartPage startPage;
@@ -35,10 +37,6 @@ public class Hooks {
     FirefoxProfile firefoxProfile;
     ChromeOptions chromeOptions;
     EdgeOptions edgeOptions;
-
-    public static WebDriver getDriver() {
-        return driver;
-    }
 
     @Before
     public void setUp() {
@@ -88,7 +86,7 @@ public class Hooks {
         }
 
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         logger.debug("Thread ID: " + Thread.currentThread().getId());
         driver.get("https://www.storia.ro");
 
@@ -96,7 +94,7 @@ public class Hooks {
         startPage.pressAccept();
     }
 
-    @After
+//    @After
     public void tearDown() {
         driver.quit();
     }
