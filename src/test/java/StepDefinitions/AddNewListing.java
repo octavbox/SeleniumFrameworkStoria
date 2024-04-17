@@ -43,7 +43,7 @@ public class AddNewListing {
     }
     @When("the user clicks on the Apartaments rectangle")
     public void the_user_clicks_on_the_apartaments_rectangle() {
-        roAnuntNouCategorie.pressApartamente();
+//        roAnuntNouCategorie.pressApartamente();
     }
     @When("the user clicks on the Continua button")
     public void the_user_clicks_on_the_continua_button() throws InterruptedException {
