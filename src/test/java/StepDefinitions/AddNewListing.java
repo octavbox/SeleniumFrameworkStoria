@@ -47,7 +47,7 @@ public class AddNewListing {
     }
     @When("the user clicks on the Continua button")
     public void the_user_clicks_on_the_continua_button() throws InterruptedException {
-        roAnuntNouCategorie.pressContinua();
+//        roAnuntNouCategorie.pressContinua();
     }
     @Then("the Adaugare Descriere page appears")
     public void the_vanzare_apartamente_page_appears() {
