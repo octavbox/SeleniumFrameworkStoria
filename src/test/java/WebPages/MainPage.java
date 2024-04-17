@@ -107,6 +107,9 @@ public class MainPage {
     @FindAll({@FindBy(xpath = favouritesXpath + "/parent::a/parent::div/ul/li/a/span")})
     private List<WebElement> fix_anunturiCounter;
 
+    @FindBy(xpath = "//div/div/div/button[@data-cy=\"add-item-button\"]")
+    private WebElement btn_adaugaAnunt;
+
     public void pressContulMeu() {
         btn_contulMeu.click();
     }
@@ -129,6 +132,9 @@ public class MainPage {
 
     public void pressUserMenu() {
         drp_userMenu.click();
+    }
+    public void pressAdaugaAnunt(){
+        btn_adaugaAnunt.click();
     }
 
 

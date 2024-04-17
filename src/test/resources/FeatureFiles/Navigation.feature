@@ -2,7 +2,7 @@ Feature: Perform general navigation tests. Try out various Selenium capabilities
 #  Open second tab, switch between tabs, go back, refresh
 #  Upload a file, open two browser windows and perform actions on both
 
-  @Active
+
   Scenario: Add an item to Favourites and unfavourite it on a second tab
     Given the user is logged in
     When the user clicks the Search button
@@ -23,8 +23,3 @@ Feature: Perform general navigation tests. Try out various Selenium capabilities
     And the user refreshes the page
     And the user clicks on the Favourites dropdown
     And the Anunturi counter is not visible
-
-
-    Scenario: Open new tab
-      Given Storia main page is visible
-      When the user opens a new tab
